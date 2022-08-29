@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -15,14 +16,14 @@ const HeaderStyles = styled.header<StylesProps>`
   top: 0;
   right: 0;
   width: 100%;
-  z-index: 99999;
+  z-index: 100;
   box-sizing: border-box;
   height: ${(props) => props.theme.header_height};
   background-color: ${(props) => props.theme.primary};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.3s ease 0s;
+  transition: all 0.4s ease 0s;
   background: ${(props) =>
     props.active
       ? props.theme.secondary
@@ -112,3 +113,9 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { EffectFade } from "swiper";
+import { Autoplay, EffectFade } from "swiper";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,7 +13,7 @@ const BannerStyles = styled.div``;
 
 const Banner = () => {
   const { data } = useSWR<Response<Movie>>(
-    tmdb.getMovies("popular", 1),
+    tmdb.getMovies("now_playing", 1),
     fetcher
   );
   if (!data) return null;
@@ -21,7 +21,15 @@ const Banner = () => {
   return (
     <BannerStyles>
       <div className="container">
-        <Swiper modules={[EffectFade]} effect="fade">
+        <Swiper
+          modules={[EffectFade, Autoplay]}
+          effect="fade"
+          speed={1000}
+          grabCursor={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}>
           {data &&
             data?.results?.map((movie) => (
               <SwiperSlide key={movie.id}>

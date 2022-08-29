@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
+import NextNProgress from "nextjs-progressbar";
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import DefaultLayout from "../layouts";
@@ -11,7 +12,7 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
 };
 
-type AppPropsWithLayout = AppProps & {
+export type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
@@ -23,7 +24,19 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        {getLayout(<Component {...pageProps} />)}
+
+        {getLayout(
+          <>
+            <NextNProgress
+              color="#29D"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={3}
+              options={{ showSpinner: false }}
+            />
+            <Component {...pageProps} />
+          </>
+        )}
       </ThemeProvider>
     </React.Fragment>
   );
