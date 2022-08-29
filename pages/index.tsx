@@ -1,7 +1,12 @@
 import type { NextPage } from "next";
+import Banner from "../layouts/banner";
 
 const Home: NextPage = () => {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <Banner></Banner>
+    </div>
+  );
 };
 
 export default Home;

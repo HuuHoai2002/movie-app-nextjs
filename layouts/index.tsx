@@ -8,7 +8,10 @@ interface Props {
   children: React.ReactNode;
 }
 
-const DefaultLayoutStyles = styled.div``;
+const DefaultLayoutStyles = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 const DefaultLayout = ({ children }: Props) => {
   return (

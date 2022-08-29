@@ -4,6 +4,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import DefaultLayout from "../layouts";
 import GlobalStyles from "../styles/GlobalStyles";
+import "../styles/index.scss";
 import { theme } from "../styles/theme";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

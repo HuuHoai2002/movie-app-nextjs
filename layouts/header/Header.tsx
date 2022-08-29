@@ -6,13 +6,27 @@ import { Logo } from "../../components/icons";
 import { routes } from "../../config/route";
 import { navigation } from "./navigation";
 
-const HeaderStyles = styled.header`
+interface StylesProps {
+  active: boolean;
+}
+
+const HeaderStyles = styled.header<StylesProps>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 99999;
   box-sizing: border-box;
   height: ${(props) => props.theme.header_height};
   background-color: ${(props) => props.theme.primary};
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.3s ease 0s;
+  background: ${(props) =>
+    props.active
+      ? props.theme.secondary
+      : "linear-gradient(rgb(16, 16, 16), rgba(16, 16, 16, 0));"};
 
   .container {
     width: 1280px;
@@ -34,13 +48,14 @@ const HeaderStyles = styled.header`
         .link {
           display: block;
           padding: 5px 0;
-          font-weight: 500;
+          font-weight: 400;
           color: ${(props) => props.theme.white};
           opacity: 0.6;
           transition: all 0.25s;
 
           &.active {
             opacity: 1;
+            font-weight: 500;
           }
 
           &:hover:not(.active) {
@@ -54,11 +69,27 @@ const HeaderStyles = styled.header`
 
 const Header: React.FC = () => {
   const { pathname } = useRouter();
+  const [active, setActive] = React.useState(false);
   const activeClassName = (path: string, className: string) =>
     pathname === path ? `${className} active` : className;
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setActive(true);
+      } else {
+        setActive(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <HeaderStyles>
+    <HeaderStyles active={active}>
       <div className="container">
         <div className="nav-left">
           <Link href={routes.home}>
