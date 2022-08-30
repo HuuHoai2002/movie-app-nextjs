@@ -1,48 +1,63 @@
+import axios from "axios";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { Movie } from "../../@types";
+import { tmdb } from "../../services/tmdbApi";
 
-type Props = {};
+interface Props {
+  movie: Movie;
+}
 
-const MovieSlug = (props: Props) => {
+const MovieSlug = ({ movie }: Props) => {
+  console.log("🚀 ~ file: [slug].tsx ~ line 12 ~ MovieSlug ~ movie", movie);
+  const router = useRouter();
+  const { slug } = router.query;
   return (
     <div>
       <Head>
         <link
           rel="canonical"
-          href="http://tv360.vn/movie/ranh-gioi-an-toan-khem-sorn-plai?m=16390&amp;col=1113&amp;sect=FILM&amp;page=home_film"
+          href={`https://movie-app-nextjs-green.vercel.app/movie/${slug}?id=${movie.id}`}
         />
         <meta property="og:type" content="website" />
         <title>
-          Ranh Giới An Toàn - Khem Sorn Plai (Phát Song Song) - Tập 1
+          {movie.title} - {movie.overview}
         </title>
-        <meta name="description" content="Ranh Giới An Toàn - Khem Sorn Plai" />
-        <meta
-          name="keywords"
-          content="Ranh Giới An Toàn, Khem Sorn Plai,Ranh Giới An Toàn vietsub, xem phim Ranh Giới An Toàn, xem phim Khem Sorn Plai, Khem Sorn Plai vietsub,phim Thái Lan hot, phim bộ Thái Lan"
-        />
+        <meta name="description" content={movie.title} />
+        <meta name="keywords" content={`${movie.title}, ${movie.overview}`} />
         <meta
           property="og:image"
-          content="http://img-zlr1.tv360.vn/image1/2022/08/17/21/b066e240/b066e240-721c-4916-957f-efc4528e41c7_640_360.jpg"
+          content={tmdb.getImageUrl(movie.poster_path, "w500")}
         />
         <meta property="og:image:type" content="image/png" />
         <meta
           property="og:image:alt"
-          content="Ranh Giới An Toàn - Khem Sorn Plai"
+          content={`${movie.title} - ${movie.overview}`}
         />
         <meta
           property="og:url"
-          content="http://tv360.vn/movie/ranh-gioi-an-toan-khem-sorn-plai-phat-song-song-tap-1?m=16390&amp;e=804805"
+          content={`https://movie-app-nextjs-green.vercel.app/movie/${slug}?id=${movie.id}`}
         />
-        <meta
-          property="og:title"
-          content="Ranh Giới An Toàn - Khem Sorn Plai"
-        />
-        <meta
-          property="og:description"
-          content="Ranh Giới An Toàn - Khem Sorn Plai"
-        />
+        <meta property="og:title" content={movie.title} />
+        <meta property="og:description" content={movie.title} />
       </Head>
     </div>
   );
 };
 
 export default MovieSlug;
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { id } = context.query;
+  const response = await axios.get(tmdb.getDetail(id as string, "movie"));
+  const movie = response.data;
+
+  return {
+    props: {
+      movie,
+    },
+  };
+};
