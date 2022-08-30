@@ -23,7 +23,7 @@ const MovieSlug = ({ movie }: Props) => {
         />
         <meta property="og:type" content="website" />
         <title>{movie.title}</title>
-        <meta name="description" content={movie.title} />
+        <meta name="description" content={movie.overview} />
         <meta name="keywords" content={`${movie.title}, ${movie.overview}`} />
         <meta
           property="og:image"
@@ -39,7 +39,7 @@ const MovieSlug = ({ movie }: Props) => {
           content={`https://movie-app-nextjs-green.vercel.app/movie/${slug}?id=${movie.id}`}
         />
         <meta property="og:title" content={movie.title} />
-        <meta property="og:description" content={movie.title} />
+        <meta property="og:description" content={movie.overview} />
       </Head>
       <MovieDetails {...movie}></MovieDetails>
     </MainLayout>
