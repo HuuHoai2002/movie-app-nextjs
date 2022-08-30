@@ -60,7 +60,7 @@ const MovieList = () => {
 
   React.useEffect(() => {
     if (isVisible) {
-      setPage(page + 1);
+      setPage((page) => page + 1);
     }
   }, [isVisible]);
 
