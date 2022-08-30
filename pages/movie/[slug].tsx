@@ -2,19 +2,20 @@ import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Movie } from "../../@types";
+import { MovieDetail } from "../../@types/MovieDetail";
+import MovieDetails from "../../layouts/detail";
 import { tmdb } from "../../services/tmdbApi";
+import { MainLayout } from "../../styles/MainLayout";
 
 interface Props {
-  movie: Movie;
+  movie: MovieDetail;
 }
 
 const MovieSlug = ({ movie }: Props) => {
-  console.log("🚀 ~ file: [slug].tsx ~ line 12 ~ MovieSlug ~ movie", movie);
   const router = useRouter();
   const { slug } = router.query;
   return (
-    <div>
+    <MainLayout marginTop="100px">
       <Head>
         <link
           rel="canonical"
@@ -40,7 +41,8 @@ const MovieSlug = ({ movie }: Props) => {
         <meta property="og:title" content={movie.title} />
         <meta property="og:description" content={movie.title} />
       </Head>
-    </div>
+      <MovieDetails {...movie}></MovieDetails>
+    </MainLayout>
   );
 };
 
@@ -59,3 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (
     },
   };
 };
+
+// SEO : compelling text that describes the content of the page
+// title : the title of the page
+// description : the description of the page

@@ -3,13 +3,13 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import { Movie, Response } from "../../@types";
+import Grid from "../../components/grid";
 import { useIntersectionObserver } from "../../hooks";
 import { tmdb } from "../../services/tmdbApi";
 import MovieItem from "./MovieItem";
 
 const MovieListStyles = styled.div`
   width: 100%;
-  height: 100vh;
 
   .title {
     font-weight: 500;
@@ -20,9 +20,6 @@ const MovieListStyles = styled.div`
 
   .movie-list {
     margin-top: 25px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px;
 
     .loading {
       width: 100%;
@@ -67,11 +64,10 @@ const MovieList = () => {
   return (
     <MovieListStyles>
       <h1 className="title">Popular Movie</h1>
-
-      <div className="movie-list">
+      <Grid col={5} className="movie-list" gap={20}>
         {movies &&
           movies?.map((movie) => <MovieItem key={movie.id} {...movie} />)}
-      </div>
+      </Grid>
       {isVisible ? (
         <div className="loading">Loading...</div>
       ) : (

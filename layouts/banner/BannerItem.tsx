@@ -26,7 +26,7 @@ const BannerItemStyles = styled.div`
   }
 `;
 
-const BannerItem: React.FC<Movie> = (props: Movie) => {
+const BannerItem: React.FC<Movie> = (props) => {
   return (
     <BannerItemStyles>
       <div className="container">
