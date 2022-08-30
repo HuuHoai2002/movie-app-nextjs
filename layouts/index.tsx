@@ -58,10 +58,10 @@ const DefaultLayout = ({ children }: Props) => {
         <meta property="og:site_name" content="NextJS-Movie-App.com" />
         <meta property="og:rich_attachment" content="true" />
         <meta property="og:type" content="website" />
-        {/* <meta
+        <meta
           property="og:image"
           content="http://cdn-vttvas.public.storebox.vn/image1/TV360_static_image/tivi360.jpg"
-        /> */}
+        />
         <meta property="og:image:type" content="image/png" />
         <meta
           property="og:image:alt"
