@@ -41,7 +41,7 @@ class TmdbApi {
   }
 
   getImageUrl(path: string, size: imageWithSize): string {
-    const url = `${this.baseImageUrl}/${size}/${path}`;
+    const url = `${this.baseImageUrl}/${size}${path}`;
     return url;
   }
 }

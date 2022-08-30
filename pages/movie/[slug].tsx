@@ -28,7 +28,7 @@ const MovieSlug = ({ movie }: Props) => {
         <meta name="keywords" content={`${movie.title}, ${movie.overview}`} />
         <meta
           property="og:image"
-          content={tmdb.getImageUrl(movie.poster_path, "w500")}
+          content={tmdb.getImageUrl(movie.backdrop_path, "w500")}
         />
         <meta property="og:image:type" content="image/png" />
         <meta
