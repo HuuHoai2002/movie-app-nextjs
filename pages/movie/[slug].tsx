@@ -21,9 +21,7 @@ const MovieSlug = ({ movie }: Props) => {
           href={`https://movie-app-nextjs-green.vercel.app/movie/${slug}?id=${movie.id}`}
         />
         <meta property="og:type" content="website" />
-        <title>
-          {movie.title} - {movie.overview}
-        </title>
+        <title>{movie.title}</title>
         <meta name="description" content={movie.title} />
         <meta name="keywords" content={`${movie.title}, ${movie.overview}`} />
         <meta
