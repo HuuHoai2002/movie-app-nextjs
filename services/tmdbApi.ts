@@ -26,17 +26,17 @@ class TmdbApi {
   }
 
   getDetail(id: string, category: categories): string {
-    const url = `${this.baseUrl}/${category}/${id}?api_key=${this.apiKey}`;
+    const url = `${this.baseUrl}/${category}/${id}?api_key=${this.apiKey}&language=vi`;
     return url;
   }
 
   getMovies(type: movieType, page: number): string {
-    const url = `${this.baseUrl}/${this.categories.movie}/${type}?api_key=${this.apiKey}&page=${page}`;
+    const url = `${this.baseUrl}/${this.categories.movie}/${type}?api_key=${this.apiKey}&page=${page}&language=vi`;
     return url;
   }
 
   getTvSeries(movieType: movieType, page: number): string {
-    const url = `${this.baseUrl}/${this.categories.tv}/${movieType}?api_key=${this.apiKey}&page=${page}`;
+    const url = `${this.baseUrl}/${this.categories.tv}/${movieType}?api_key=${this.apiKey}&page=${page}&language=vi`;
     return url;
   }
 

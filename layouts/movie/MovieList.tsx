@@ -38,11 +38,12 @@ const MovieList = () => {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
+
   const [movies, setMovies] = React.useState<Movie[]>([]);
   const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    // const abortController = new AbortController();
+    const abortController = new AbortController();
     const fetchData = async () => {
       const response = await axios.get<Response<Movie>>(
         tmdb.getMovies("popular", page)
@@ -50,9 +51,10 @@ const MovieList = () => {
       setMovies([...movies, ...response.data.results]);
     };
     fetchData();
-    // return () => {
-    //   abortController.abort();
-    // };
+    
+    return () => {
+      abortController.abort();
+    };
   }, [page]);
 
   React.useEffect(() => {
