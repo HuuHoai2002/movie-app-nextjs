@@ -9,9 +9,7 @@ import fetcher from "../../services/fetcher";
 import { tmdb } from "../../services/tmdbApi";
 import BannerItem from "./BannerItem";
 
-const BannerStyles = styled.div`
-  min-height: 100vh;
-`;
+const BannerStyles = styled.div``;
 
 const Banner = () => {
   const { data } = useSWR<Response<Movie>>(

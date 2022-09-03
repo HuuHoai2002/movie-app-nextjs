@@ -20,10 +20,10 @@ const MovieItem = (props: Movie) => {
   return (
     <MovieItemStyles>
       <Link
-        href={`/movie/${slugify(props.title, {
+        href={`/movie/${slugify(`${props.title + "_" + props.id}`, {
           lower: true,
           locale: "vi",
-        })}?id=${props.id}`}>
+        })}`}>
         <a>
           <Image
             src={tmdb.getImageUrl(props.poster_path, "w500")}

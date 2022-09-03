@@ -27,7 +27,6 @@ import { MovieDetail } from "../../@types/MovieDetail";
 import { tmdb } from "../../services/tmdbApi";
 
 const MovieDetails: React.FC<MovieDetail> = (props) => {
-  console.log("🚀 ~ file: MovieDetails.tsx ~ line 9 ~ props", props);
   return (
     <MovieDetailsStyled>
       <Flex className="container" gap={20}>

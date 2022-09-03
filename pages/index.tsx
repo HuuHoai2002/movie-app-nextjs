@@ -78,7 +78,12 @@ const Home: NextPage = () => {
         <title>TV360 | Phim</title>
         <meta name="next-head-count" content="20" />
       </Head>
-      <Banner></Banner>
+      <div
+        style={{
+          minHeight: "100vh",
+        }}>
+        <Banner></Banner>
+      </div>
       <MainLayout>
         <MovieList></MovieList>
       </MainLayout>
