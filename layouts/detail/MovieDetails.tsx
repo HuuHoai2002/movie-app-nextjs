@@ -48,7 +48,7 @@ const MovieDetailsStyles = styled.div`
       margin-right: auto;
 
       .content-left {
-        max-width: 60%;
+        width: 60%;
         .title {
           font-size: 28px;
           font-weight: 600;
