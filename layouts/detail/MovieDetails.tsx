@@ -1,53 +1,136 @@
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import Flex from "../../components/flex";
+import { MovieDetail } from "../../@types/MovieDetail";
+import FieldMeta from "../../components/field";
+import { tmdb } from "../../services/tmdbApi";
 
-const MovieDetailsStyled = styled.div`
+const MovieDetailsStyles = styled.div`
+  position: relative;
+
+  .backdrop {
+    position: relative;
+    width: 100%;
+    z-index: -1;
+
+    ::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
   .container {
     width: 100%;
+    position: absolute;
 
-    .background {
-      width: 100%;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10% 0 20% 0;
+
+    ::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: -1;
     }
 
     .content {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
       width: 100%;
-      flex: 1;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
 
-      .movie-title {
-        font-size: 26px;
-        font-weight: 500;
+      .content-left {
+        max-width: 60%;
+        .title {
+          font-size: 28px;
+          font-weight: 600;
+          color: ${(props) => props.theme.white};
+        }
+
+        .meta {
+          margin-top: 40px;
+          .description {
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: justify;
+
+            .label {
+              font-weight: 500;
+              color: ${(props) => props.theme.white};
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+
+      .content-right {
+        flex: 1;
+        width: 100%;
+        .wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
       }
     }
   }
 `;
 
-import Image from "next/image";
-import { MovieDetail } from "../../@types/MovieDetail";
-import { tmdb } from "../../services/tmdbApi";
-
 const MovieDetails: React.FC<MovieDetail> = (props) => {
+  console.log("🚀 ~ file: MovieDetails.tsx ~ line 75 ~ props", props);
   return (
-    <MovieDetailsStyled>
-      <Flex className="container" gap={20}>
-        <div className="background">
-          <Image
-            src={tmdb.getImageUrl(props.backdrop_path, "original")}
-            alt=""
-            width="100%"
-            height="60%"
-            sizes="responsive"
-            objectFit="cover"
-            className="image"
-          />
+    <MovieDetailsStyles>
+      <div className="backdrop">
+        <Image
+          src={tmdb.getImageUrl(props.backdrop_path, "original")}
+          alt=""
+          width="100%"
+          height="50%"
+          sizes="responsive"
+          objectFit="cover"
+          className="image"
+        />
+      </div>
+      <div className="container">
+        <div className="content">
+          <div className="content-left">
+            <h1 className="title">{props.title}</h1>
+            <div className="meta">
+              <p className="description">
+                <span className="label">Mô tả:</span> {props.overview}
+              </p>
+            </div>
+          </div>
+          <div className="content-right">
+            <div className="wrapper">
+              <FieldMeta
+                label="Thể Loại: "
+                value={props.genres.slice(0, 3).map((item) => item.name)}
+              />
+              <FieldMeta
+                label="Ngày Ra Rạp: "
+                value={new Date(props.release_date).toLocaleDateString("vi-VN")}
+              />
+              <FieldMeta label="Thời Lượng: " value={`${props.runtime} Phút`} />
+              <FieldMeta
+                label="Trạng Thái: "
+                value={`${
+                  props.status.includes("Released") ? "Đã Chiếu" : "Sắp Chiếu"
+                }`}
+              />
+            </div>
+          </div>
         </div>
-        {/* <div className="content">
-          <h1 className="movie-title">
-            {props.title} ({props.release_date.split("-")[0]})
-          </h1>
-        </div> */}
-      </Flex>
-    </MovieDetailsStyled>
+      </div>
+    </MovieDetailsStyles>
   );
 };
 

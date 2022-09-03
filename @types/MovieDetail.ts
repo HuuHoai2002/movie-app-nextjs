@@ -26,9 +26,9 @@ export interface MovieDetail {
   poster_path: string;
   production_companies: Companies[];
   production_countries: any[];
-  release_date: string;
+  release_date: Date;
   revenue: number;
-  runtime: number;
+  runtime: string;
   spoken_languages: any[];
   status: string;
   tagline: string;

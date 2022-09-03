@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
-const TagStyles = styled.div`
+interface StyledProps {
+  backgroundColor?: string;
+}
+
+const TagStyles = styled.div<StyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 10px 25px;
+  border-radius: 7px;
 `;
 
-interface Props {}
+interface Props {
+  children: React.ReactNode;
+}
 
-const Tag = (props: Props) => {
-  return <TagStyles>Tag</TagStyles>;
+const Tag = ({ children, ...props }: Props & StyledProps) => {
+  return <TagStyles {...props}>{children}</TagStyles>;
 };
 
 export default Tag;

@@ -23,7 +23,7 @@ const MovieSlug = ({ movie }: Props) => {
   const router = useRouter();
   const { slug } = router.query;
   return (
-    <MainLayout marginTop="100px">
+    <MainLayout maxWidth="100%">
       {movie && (
         <>
           <Head>
@@ -88,18 +88,25 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 }) => {
   const { slug } = params!;
   const id = slug.split("_")[1];
-  const response = await axios.get(tmdb.getDetail(id, "movie"));
-  const movie: MovieDetail = response.data;
 
-  return movie
-    ? {
-        props: {
-          movie,
-        },
-      }
-    : {
-        notFound: true,
-      };
+  if (!id) {
+    return {
+      notFound: true,
+    };
+  } else {
+    const response = await axios.get(tmdb.getDetail(id, "movie"));
+    const movie: MovieDetail = response.data;
+
+    return movie
+      ? {
+          props: {
+            movie,
+          },
+        }
+      : {
+          notFound: true,
+        };
+  }
 };
 
 // SEO : compelling text that describes the content of the page
