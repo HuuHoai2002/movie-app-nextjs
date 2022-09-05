@@ -6,11 +6,11 @@ import slugify from "slugify";
 import { Movie } from "../../@types";
 import { MovieDetail } from "../../@types/MovieDetail";
 import Seo from "../../components/seo";
-import MovieDetails from "../../layouts/detail";
+import Watch from "../../layouts/watch";
 import { tmdb } from "../../services/tmdbApi";
 import { MainLayout } from "../../styles/MainLayout";
 
-interface Props {
+interface WatchProps {
   movie: MovieDetail;
 }
 
@@ -19,7 +19,7 @@ interface Params extends ParsedUrlQuery {
   id: string;
 }
 
-const MovieSlug = ({ movie }: Props) => {
+const WatchPage = ({ movie }: WatchProps) => {
   const router = useRouter();
   const { slug } = router.query;
   return (
@@ -31,17 +31,17 @@ const MovieSlug = ({ movie }: Props) => {
             image={movie.backdrop_path}
             keywords={`${movie.title}, ${movie.overview}`}
             meta={{ slug: slug as string, id: movie.id }}
-            title={movie.title}
-            url={`https://movie-app-nextjs-green.vercel.app/movie`}
+            title={`${movie.title} Full HD VietSub | NextJS Movie App`}
+            url={`https://movie-app-nextjs-green.vercel.app/watch`}
           />
-          <MovieDetails {...movie}></MovieDetails>
+          <Watch {...movie} />
         </>
       )}
     </MainLayout>
   );
 };
 
-export default MovieSlug;
+export default WatchPage;
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const response = await axios.get(tmdb.getMovies("popular", 1));
@@ -63,7 +63,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
+export const getStaticProps: GetStaticProps<WatchProps, Params> = async ({
   params,
 }) => {
   const { slug } = params!;
@@ -88,7 +88,3 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
         };
   }
 };
-
-// SEO : compelling text that describes the content of the page
-// title : the title of the page
-// description : the description of the page

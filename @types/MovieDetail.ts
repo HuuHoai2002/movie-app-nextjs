@@ -17,7 +17,7 @@ export interface MovieDetail {
   budget: number;
   genres: Genre[];
   homepage: string;
-  id: number;
+  id: string;
   imdb_id: string;
   original_language: string;
   original_title: string;

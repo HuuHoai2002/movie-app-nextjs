@@ -1,7 +1,10 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
+import slugify from "slugify";
 import styled from "styled-components";
 import { MovieDetail } from "../../@types/MovieDetail";
+import Button from "../../components/button";
 import FieldMeta from "../../components/field";
 import { tmdb } from "../../services/tmdbApi";
 
@@ -22,13 +25,12 @@ const MovieDetailsStyles = styled.div`
   }
 
   .container {
-    width: 100%;
     position: absolute;
-
-    top: 68%;
+    width: 100%;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10% 0 20% 0;
+    transform: translate(-50%, 0);
+    padding: 10% 0;
 
     ::after {
       content: "";
@@ -48,7 +50,7 @@ const MovieDetailsStyles = styled.div`
       margin-right: auto;
 
       .content-left {
-        max-width: 60%;
+        width: 60%;
         .title {
           font-size: 28px;
           font-weight: 600;
@@ -56,7 +58,7 @@ const MovieDetailsStyles = styled.div`
         }
 
         .meta {
-          margin-top: 40px;
+          margin: 40px 0;
           .description {
             font-size: 16px;
             line-height: 1.5;
@@ -85,7 +87,20 @@ const MovieDetailsStyles = styled.div`
 `;
 
 const MovieDetails: React.FC<MovieDetail> = (props) => {
-  console.log("🚀 ~ file: MovieDetails.tsx ~ line 75 ~ props", props);
+  const router = useRouter();
+
+  const handleNavigate = () => {
+    router.push(
+      `/watch/${
+        slugify(props.title, {
+          lower: true,
+          locale: "vi",
+        }) +
+        "_" +
+        props.id
+      }`
+    );
+  };
   return (
     <MovieDetailsStyles>
       <div className="backdrop">
@@ -107,6 +122,11 @@ const MovieDetails: React.FC<MovieDetail> = (props) => {
               <p className="description">
                 <span className="label">Mô tả:</span> {props.overview}
               </p>
+            </div>
+            <div className="action">
+              <Button width="150px" onClick={handleNavigate}>
+                Xem Ngay
+              </Button>
             </div>
           </div>
           <div className="content-right">

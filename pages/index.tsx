@@ -48,13 +48,16 @@ const Home: NextPage = () => {
         <meta name="theme-color" content="#ffffff" />
         <meta
           name="description"
-          content="NextJS Movie App - Xem truyền hình trực tiếp, bóng đá ngoại hạng anh, kho phim HD đặc sắc, phim mới cập nhật liên tục và các chương trình truyền hình trực tuyến, VTV, các kênh K+, thể thao 24giờ mọi lúc mọi nơi."
+          content="NextJS Movie App - Xem phim mọi lúc, mọi nơi, miễn phí truy cập vô thời hạn, kho phim khổng siêu khổng lồ, đủ mọi thể loại: Phim Kinh Dị, Phim Hoạt Hình, Phim Hành Động, Phim Phiêu Lưu, Phim 4K."
         />
         <meta
           name="keywords"
           content="Phim hành động, phim HD, VTV1, VTV2, VTV3, VTV6, K+, HTV, Thể Thao, Truyền Hình Trực Tuyến, Bóng Đá, Phim Hàn Quốc, Phim Trung Quốc, Ngoại hạng Anh, xem tivi miễn phí Data 4G"
         />
-        <meta property="og:site_name" content="NextJS-Movie-App.com" />
+        <meta
+          property="og:site_name"
+          content="movie-app-nextjs-green.vercel.app"
+        />
         <meta property="og:rich_attachment" content="true" />
         <meta property="og:type" content="website" />
         <meta
@@ -64,18 +67,18 @@ const Home: NextPage = () => {
         <meta property="og:image:type" content="image/png" />
         <meta
           property="og:image:alt"
-          content="TV360 - Xem truyền hình trực tuyến, các kênh K+, kho phim HD đặc sắc"
+          content="NextJS Movie App - Xem phim miễn phí, không lo quảng cáo, kho phim HD đặc sắc"
         />
         <meta property="og:url" content="http://tv360.vn" />
         <meta
           property="og:title"
-          content="TV360 - Xem truyền hình trực tuyến, các kênh K+, kho phim HD đặc sắc"
+          content="NextJS Movie App - Xem phim miễn phí, không lo quảng cáo, kho phim HD đặc sắc"
         />
         <meta
           property="og:description"
-          content="TV360 - Xem truyền hình trực tiếp, bóng đá ngoại hạng anh, kho phim HD đặc sắc, phim mới cập nhật liên tục và các chương trình truyền hình trực tuyến, VTV, các kênh K+, thể thao 24giờ mọi lúc mọi nơi."
+          content="NextJS Movie App - Xem phim mọi lúc, mọi nơi, miễn phí truy cập vô thời hạn, kho phim khổng siêu khổng lồ, đủ mọi thể loại: Phim Kinh Dị, Phim Hoạt Hình, Phim Hành Động, Phim Phiêu Lưu, Phim 4K."
         />
-        <title>TV360 | Phim</title>
+        <title>NextJS Movie App | Phim</title>
         <meta name="next-head-count" content="20" />
       </Head>
       <div
