@@ -2,10 +2,12 @@ import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
+import { ReactElement } from "react";
 import slugify from "slugify";
 import { Movie } from "../../@types";
 import { MovieDetail } from "../../@types/MovieDetail";
 import Seo from "../../components/seo";
+import WatchLayout from "../../layouts/common/WatchLayout";
 import Watch from "../../layouts/watch";
 import { tmdb } from "../../services/tmdbApi";
 import { MainLayout } from "../../styles/MainLayout";
@@ -42,6 +44,10 @@ const WatchPage = ({ movie }: WatchProps) => {
 };
 
 export default WatchPage;
+
+WatchPage.getLayout = (page: ReactElement) => {
+  return <WatchLayout>{page}</WatchLayout>;
+};
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const response = await axios.get(tmdb.getMovies("popular", 1));

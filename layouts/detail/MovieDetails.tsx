@@ -98,7 +98,7 @@ const MovieDetails: React.FC<MovieDetail> = (props) => {
         }) +
         "_" +
         props.id
-      }`
+      }?timestamp=${Date.now()}&is_fallback`
     );
   };
   return (

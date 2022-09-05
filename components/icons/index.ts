@@ -1,3 +1,4 @@
+import ChevronLeft from "./ChevronLeft";
 import Logo from "./Logo";
 
-export { Logo };
+export { Logo, ChevronLeft };

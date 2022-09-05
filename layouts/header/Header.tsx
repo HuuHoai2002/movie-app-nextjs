@@ -10,7 +10,6 @@ import { navigation } from "./navigation";
 interface StylesProps {
   active: boolean;
 }
-
 const HeaderStyles = styled.header<StylesProps>`
   position: fixed;
   top: 0;
@@ -68,7 +67,7 @@ const HeaderStyles = styled.header<StylesProps>`
   }
 `;
 
-const Header: React.FC = () => {
+const Header: React.FC = ({}) => {
   const { pathname } = useRouter();
   const [active, setActive] = React.useState(false);
   const activeClassName = (path: string, className: string) =>
